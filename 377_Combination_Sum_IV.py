@@ -3,21 +3,15 @@ from typing import List
 
 class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
-        res=[]
-        subRes=[]
-        def backtracking(subTarget:int):
-            if subTarget<0:
-                return
-            elif subTarget==0:
-                res.append(subRes.copy())
-                return 
-            else:
-                for i in nums:
-                    subRes.append(i)
-                    backtracking(subTarget-i)
-                    subRes.pop()
-        backtracking(target)
-        return len(res) 
+        dp = [0] * (target + 1)
+        dp[0] = 1
+        
+        for i in range(1, target + 1):
+            for num in nums:
+                if i - num >= 0:
+                    dp[i] += dp[i - num]
+                    
+        return dp[target]
     
 s=Solution()
 nums = [1,2,4]
