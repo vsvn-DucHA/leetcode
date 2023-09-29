@@ -3,16 +3,23 @@ from typing import List
 
 class Solution:
     def isMonotonic(self, nums: List[int]) -> bool:
-        if len(nums) in [1,2]:
+        if len(nums) < 2:
             return True
-        check=[0,0]
-        for i in range(1,len(nums)):
-            if (nums[i]-nums[i-1])<0:
-                check[0]+=1
-            if (nums[i]-nums[i-1])>0:
-                check[1]+=1
-            if check[0]*check[1]!=0:
-                return False
+        
+        direction = 0  # 0 means unknown, 1 means increasing, -1 means decreasing
+        
+        for i in range(1, len(nums)):
+            if nums[i] > nums[i-1]:  # increasing
+                if direction == 0:
+                    direction = 1
+                elif direction == -1:
+                    return False
+            elif nums[i] < nums[i-1]:  # decreasing
+                if direction == 0:
+                    direction = -1
+                elif direction == 1:
+                    return False
+        
         return True
     
 s=Solution()
