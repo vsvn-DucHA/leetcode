@@ -1,0 +1,16 @@
+class Solution:
+    def minimumPartition(self, s: str, k: int) -> int:
+        curr, ans = 0, 1
+        for d in s:
+            if int(d) > k:
+                return -1
+            curr = 10 * curr + int(d)
+            if curr > k:
+                ans += 1
+                curr = int(d)
+        return ans
+    
+s = "165462"
+k = 60
+so=Solution()
+print(so.minimumPartition(s,k))
