@@ -66,7 +66,6 @@ class Solution:
                 while required[s[l]] < 0:
                     required[s[l]] += 1
                     l += 1
-                # Speed boost: Recalculate ans minimally
                 ans = min(ans, (l, r), key=lambda x: x[1] - x[0])
                 count += 1
                 required[s[l]] += 1
